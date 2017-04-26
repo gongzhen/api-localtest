@@ -27,7 +27,7 @@ del.addEventListener('click' , () => {
 			'Content-Type': 'application/json'
 		},
 		body:JSON.stringify({
-			'name': 'Darth Vader'
+			'name': 'jason'
     	})
 	})
 	.then((response) => {

@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
 
-const Consumers = require('./lib/models/consumer')
+const Consumers = require('./lib/models/Model')
 
 app.get('/', (req, res) => {
 	Consumers.find((err, data) => {
@@ -25,19 +25,20 @@ app.get('/', (req, res) => {
 	});	
 });
 
-app.put('/consumers', (req, res) => {
-	Consumers.findOneAndUpdate({name: req.body.name}, {email:req.body.email}, {'upsert': false}, (err, consumer) => {
-		if(err) {
-			console.log(err);
-		}
-		res.redirect('/');
-	});
-});
 
 app.post('/consumers', (req, res) => {
 	Consumers.create(req.body, (err, consumer) => {
 		if(err) {
 			return console.log(err);
+		}
+		res.redirect('/');
+	});
+});
+
+app.put('/consumers', (req, res) => {
+	Consumers.findOneAndUpdate({name: req.body.name}, {email:req.body.email}, {'upsert': false}, (err, consumer) => {
+		if(err) {
+			console.log(err);
 		}
 		res.redirect('/');
 	});

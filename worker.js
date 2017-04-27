@@ -21,37 +21,36 @@ app.get('/', (req, res) => {
 		if(err) {
 			return console.log(err);
 		}
-		console.log(data);
-		res.render('index.ejs', {quotes: data});	
+		res.render('index.ejs', {consumers: data});	
 	});	
 });
 
-app.put('/quotes', (req, res) => {
-	var query = {name: "chris"};
-	Consumers.findOneAndUpdate(query, {name:'jason borne'}, {'upsert': false}, (err, consumer) => {
+app.put('/consumers', (req, res) => {
+	Consumers.findOneAndUpdate({name: req.body.name}, {email:req.body.email}, {'upsert': false}, (err, consumer) => {
 		if(err) {
 			console.log(err);
 		}
-		res.json(consumer);
+		res.redirect('/');
 	});
 });
 
-app.post('/quotes', (req, res) => {
+app.post('/consumers', (req, res) => {
 	Consumers.create(req.body, (err, consumer) => {
 		if(err) {
 			return console.log(err);
 		}
-		res.json(consumer);
+		res.redirect('/');
 	});
 });
 
-app.delete('/quotes', (req, res) => {
-	var query = {name: "chris"};
-	Consumers.findOneAndRemove(query, {'upsert': false}, (err, consumer) => {
+app.delete('/consumers', (req, res) => {
+	Consumers.findOneAndRemove({name: req.body.name}, {'upsert': false}, (err, consumer) => {
 		if(err) {
 			console.log(err);
 		}
-		res.json(consumer);
+		// @todo:res.json()
+		// res.json(consumer);
+		res.redirect('/');
 	});
 });
 

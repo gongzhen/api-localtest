@@ -2,32 +2,34 @@
 var update = document.getElementById('update')
 var del = document.getElementById('delete')
 
-update.addEventListener('click', ()=>{
-	fetch('quotes', {
+update.addEventListener('click', () => {
+	fetch('consumers',
+	{
 		method:'put',
-		headers:{'Content-Type': 'application/json'},
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-Type': 'application/json'
+	    },
 		body:JSON.stringify({
-			'name': 'Darth Vader',
-      		'quote': 'I find your lack of faith disturbing.'
+			'name': document.getElementById('updateName').value,
+      		'email': document.getElementById('updateEamil').value
       	}) 
 	})
-	.then(response => {
-		if(response.ok) {
-			return response.json();
-		}
-	}).then(data => {
-		console.log(data);
+	.then((response) => {
+		window.location.reload();
 	});
 });
 
 del.addEventListener('click' , () => {
-	fetch('quotes', {
+	fetch('consumers', 
+	{
 		method:'delete',
-		headers:{
-			'Content-Type': 'application/json'
-		},
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-Type': 'application/json'
+	    },
 		body:JSON.stringify({
-			'name': 'jason'
+			'name': document.getElementById('deleteName').value
     	})
 	})
 	.then((response) => {

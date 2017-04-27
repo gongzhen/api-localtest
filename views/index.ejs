@@ -7,26 +7,29 @@
 <body>
   May Node and Express be with you.
 
-  <ul class="quotes">
-  <% for(var i=0; i<quotes.length; i++) {%>
-    <li class="quote">
-      <span><%= quotes[i].name %></span>
-      <span><%= quotes[i].quote %></span>
+  <ul class="consumers">
+  <% for(var i=0; i<consumers.length; i++) {%>
+    <li class="consumer">
+      <span><%= consumers[i].name %></span>
+      <span><%= consumers[i].email %></span>
     </li>
   <% } %>
   </ul>  
 
-  <form action="/quotes" method="POST">
+  <form action="/consumers" method="POST">
     <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="quote" name="quote">
-    <button type="submit">Submit</button>
+    <input type="text" placeholder="email" name="email">
+    <button type="submit"> Submit </button>
   </form>
 
   <div>
+    <input type='text' placeholder="name" name="name" id='updateName' />
+    <input type='text' placeholder="email" name="email" id='updateEamil' />    
     <button id="update"> Update </button>
   </div>
 
   <div>
+    <input type='text' placeholder="name" name="name" id='deleteName' />
     <button id="delete"> Delete </button>
   </div>
 	<script src="main.js"></script>
